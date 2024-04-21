@@ -76,7 +76,10 @@ const analyze = async (content: string) => {
   return null;
 };
 
-const questionAndAnswer = async (question: string, entries: JournalEntry[]) => {
+const questionAndAnswer = async (
+  question: string,
+  entries: Pick<JournalEntry, "content" | "createdAt" | "id">[]
+) => {
   const docs = entries.map(
     (entry) =>
       new Document({
@@ -85,9 +88,9 @@ const questionAndAnswer = async (question: string, entries: JournalEntry[]) => {
       })
   );
 
-  const model = new OpenAI({ temperature: 0, modelName: "gpt-3.5-turbo" });
+  const model = new OpenAI({ temperature: 0, modelName: "gpt-3.5-turbo",openAIApiKey: OPEN_AI_KEY });
   const chain = loadQARefineChain(model);
-  const embeddings = new OpenAIEmbeddings();
+  const embeddings = new OpenAIEmbeddings({openAIApiKey: OPEN_AI_KEY});
   const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
   const relevantDocs = await store.similaritySearch(question);
   const res = await chain.call({
@@ -98,4 +101,4 @@ const questionAndAnswer = async (question: string, entries: JournalEntry[]) => {
   return res.output_text;
 };
 
-export { analyze };
+export { analyze, questionAndAnswer };

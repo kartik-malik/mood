@@ -15,10 +15,16 @@ const createNewEntry = async () => {
   }
 };
 
-const askQuestions = async (question: string)=>{
-  const response = await fetch(createUrl("/api/journal"),{
- body: JSON.stringify({question}),
-  })
-}
+const askQuestions = async (question: string) => {
+  const response = await fetch(createUrl("/api/question"), {
+    body: JSON.stringify({ question }),
+    method:"POST",
+  });
 
-export { createNewEntry };
+  if(response.ok){
+    const resData = await response.json();
+    return resData.data ;
+  }
+};
+
+export { createNewEntry, askQuestions };

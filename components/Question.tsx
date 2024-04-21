@@ -1,22 +1,28 @@
-"use client"
+"use client";
 
 import { FormEvent, FormEventHandler, useState } from "react";
+import { askQuestions } from "~/utils/api";
 
 const Question = () => {
+  const [question, setQuestion] = useState("");
 
-    const [question,setQuestion] = useState('');
+  const [loading, setLoading] = useState(false);
 
-    const [loading,setLoading] = useState(false);
+  const [answer, setAnswer] = useState();
 
-    const handleSubmit = (e:FormEvent<HTMLFormElement>)=>{
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setLoading(false);
+    e.preventDefault();
+    const answer = await askQuestions(question);
 
-     e.preventDefault(); 
-     
-    }
+    setAnswer(answer);
+
+    setLoading(false);
+  };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="mb-4">
         <input
           type="text"
           value={question}
@@ -38,3 +44,5 @@ const Question = () => {
     </div>
   );
 };
+
+export { Question };
