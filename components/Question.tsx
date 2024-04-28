@@ -50,6 +50,7 @@ const Question = () => {
             <div className="rounded-full border-2 border-white border-l-slate-200 w-4 h-4 animate-spin"></div>
           )}
         </button>
+        
       </form>
       {isError && <p>Something went wrong please try again later</p>}
       {answer && <p className="my-4 text-xl">{answer}</p>}
