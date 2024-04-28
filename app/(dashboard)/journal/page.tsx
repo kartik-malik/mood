@@ -27,7 +27,7 @@ const Journal = async () => {
     <div className="p-10 bg-[#8576FF] h-full">
       <h2 className="text-3xl mb-8">Journal</h2>
       <Question />
-      <div className="grid grid-cols-3 gap-4 ">
+      <div className=" grid grid-cols-[repeat(auto-fit,minmax(200px,300px))] gap-4 ">
         <NewEntryCard update={update}/>
         {journals.map((entry) => {
           return <EntryCard entry={entry} key={entry.id} />;

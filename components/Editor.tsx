@@ -7,11 +7,13 @@ import { update } from "~/utils/actions/update";
 // TODO: add errors and loading state
 const Editor = ({
   entry,
-  // update,
-}: {
+}: // update,
+{
   entry: JournalEntry | null;
 }) => {
   const [value, setValue] = useState<string>(entry?.content ?? "");
+
+  const [status, setStatus] = useState<"loading" | "idle" | "error">("idle");
 
   // const observaleRef = useRef(new Subject<string>());
 
@@ -38,12 +40,19 @@ const Editor = ({
   if (!entry) return null;
 
   const saveEntry = () => {
+    setStatus("loading");
+
     fetch(`/api/journal/${entry?.id}`, {
       method: "PATCH",
       body: JSON.stringify({ content: value }),
-    }).then(function () {
-      update([`/journal/${entry.id}`]);
-    });
+    })
+      .then(function () {
+        setStatus("idle");
+        update([`/journal/${entry.id}`]);
+      })
+      .catch(() => {
+        setStatus("error");
+      });
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -58,12 +67,17 @@ const Editor = ({
         onChange={handleInputChange}
         className="w-full h-[80%] p-8"
       />
+      {status === "error" && <p>Something went wrong pls try again later</p>}
       <div className="flex w-full justify-center">
         <button
-          className="p-3 bg-blue-600 text-white rounded mr-10 mt-2 h-10"
+          className="text-center bg-blue-600 text-white rounded mr-10 mt-2 h-10 w-20"
           onClick={saveEntry}
+          disabled={status !== "idle"}
         >
-          Save
+          {status === "idle" && "Save"}
+          {status === "loading" && (
+            <div className="rounded-full border-2 border-white border-l-slate-200 w-4 h-4 animate-spin"></div>
+          )}
         </button>
       </div>
     </div>

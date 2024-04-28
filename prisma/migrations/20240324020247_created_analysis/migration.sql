@@ -12,7 +12,7 @@ ALTER TABLE `JournalEntry` ADD COLUMN `status` ENUM('DRAFT', 'PUBLISHED', 'ARCHI
     `subject` TEXT NOT NULL,
     `negative` BOOLEAN NOT NULL,
     `summary` TEXT NOT NULL,
-    `color` TEXT DEFAULT ('#0101fe'),
+    `color` TEXT DEFAULT('#0101fe'),
     `sentimentScore` DOUBLE DEFAULT 0,
 
     INDEX `EntryAnalysis_userId_idx`(`userId`),
