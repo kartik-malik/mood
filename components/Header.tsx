@@ -16,7 +16,7 @@ const links = [
 
 const DesktopSideBar = () => {
   return (
-    <aside className="hidden md:block w-[20%] bg-[#7BC9FF] z-[1]">
+    <aside className="hidden md:block w-[20%] bg-[#7ac1f4] z-[1]">
       {links.map(({ href, text }) => {
         return (
           <li key={text} className="text-black px-2 py-6 text-xl">
@@ -64,7 +64,7 @@ const BarContent = ({
   return (
     <>
       {open && (
-        <div className="fixed z-10 h-full w-[50%] sm:w-[20%] md top-0 left-0 bg-[#7BC9FF]">
+        <div className="fixed z-10 h-full w-[50%] sm:w-[20%] md top-0 left-0 bg-[#7ac1f4]">
           <div className="absolute right-3 top-3">
             <button
               onClick={() => setOpen?.(!open)}

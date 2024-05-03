@@ -70,7 +70,7 @@ const Editor = ({
       {status === "error" && <p>Something went wrong pls try again later</p>}
       <div className="flex w-full justify-center">
         <button
-          className="text-center bg-blue-600 text-white rounded mr-10 mt-2 h-10 w-20"
+          className="bg-blue-600 text-white rounded mr-10 mt-2 h-10 w-20 flex justify-center items-center text-center"
           onClick={saveEntry}
           disabled={status !== "idle"}
         >

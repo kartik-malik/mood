@@ -30,10 +30,10 @@ const JournalAnalysisContent = ({
           {[summary, subject].map((data) => (
             <li
               key={data.name}
-              className={`border-2 bg-violet-500/25 md:bg-teal-400 rounded-md  border-violet-500  md:border-b md:border-black/10 px-2 flex items-center justify-between mb-3`}
+              className={`border-2 bg-violet-500/25 md:bg-[#7ac1f4] rounded-md  border-violet-500  md:border-b md:border-black/10 px-2 flex items-center justify-between mb-3`}
             >
               <span className="text-sm font-semibold">{data.name}</span>
-              <span>{data.value}</span>
+              <span className="text-xs">{data.value}</span>
             </li>
           ))}
         </ul>
